@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // 1. Create state to manage the 'is-preload' class on the body.
+  const [isPreload, setIsPreload] = useState(true);
+
+  useEffect(() => {
+    // 2. Set a timeout to remove the 'is-preload' class after a short delay (e.g., 100ms)
+    // This allows the initial styles to render before the components fully mount,
+    // which prevents visual glitches (like the header being hidden).
+    const timer = setTimeout(() => {
+      setIsPreload(false);
+    }, 100);
+
+    // Cleanup the timer
+    return () => clearTimeout(timer);
+  }, []); // Run only once on mount
+
+  // 3. Apply the class to the body element dynamically
+  useEffect(() => {
+    document.body.className = isPreload ? 'is-preload' : '';
+  }, [isPreload]);
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // The #wrapper ID is CRITICAL for the template's CSS structure.
+    <div id="wrapper">
+      
+      {/* Header contains the main navigation */}
+      <Header /> 
+
+      {/* The Outlet renders the current Page (Bio, Projects, Skills, Contact) */}
+      <Outlet />
+
+      {/* Footer contains copyright and social links */}
+      <Footer />
+      
+    </div>
+  );
 }
 
-export default App
+export default App;
