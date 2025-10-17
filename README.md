@@ -93,7 +93,7 @@ To deploy your portfolio to GitHub Pages:
 
 You can access the live version of your portfolio once it's deployed:
 
-* **GitHub Pages URL:** `https://github.com/CzarinaStudio/personal-portfolio` 
+* **GitHub Pages URL:** https://czarinastudio.github.io/personal-portfolio/
 * **Demo Recording:** https://drive.google.com/drive/folders/1ZWtiy4drYMmjBSPgej9BmYO_Bohf5Cdy?usp=drive_link
 
 **Walkthrough Requirement:** The demo should include a walkthrough of both the webpage and the codebase. A high-level walkthrough is sufficient.
